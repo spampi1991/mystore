@@ -14,7 +14,7 @@ set :user, "spree"
 
 set :deploy_to, "/home/spree/#{application}"
 set :use_sudo, false
-set :linked_files, %w{config/master.key}
+set :linked_files, %w(config/master.key)
 
 ssh_options[:keys] = %w(/home/francesco/i-024922b078ed8a292.pem)
 default_run_options[:shell] = '/bin/bash --login'
