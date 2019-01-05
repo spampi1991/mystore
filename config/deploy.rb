@@ -14,12 +14,15 @@ set :user, "spree"
 
 set :deploy_to, "/home/spree/#{application}"
 set :use_sudo, false
-set :linked_files, %w(config/master.key)
 
 ssh_options[:keys] = %w(/home/francesco/i-024922b078ed8a292.pem)
 default_run_options[:shell] = '/bin/bash --login'
 default_environment['RAILS_ENV'] = 'production'
 
+task :symlink_master_key do
+  run "ln -sfn #{shared_path}/config/master.key #{release_path}/config/master.key"
+end
+after "bundle:install", "symlink_master_key"
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
